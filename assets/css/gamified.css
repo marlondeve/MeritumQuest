@@ -1,0 +1,627 @@
+/* ============================================
+   ESTILOS GAMIFICADOS - MERITUMQ
+   Inspirado en Duolingo
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+    /* Colores principales - AZUL como principal */
+    --duo-blue: #1CB0F6;
+    --duo-blue-dark: #1391C4;
+    --duo-blue-light: #4FC3F7;
+    --duo-green: #58CC02;
+    --duo-yellow: #FFC800;
+    --duo-yellow-light: #FFD900;
+    --duo-red: #FF4B4B;
+    --duo-purple: #CE82FF;
+    --duo-pink: #FF9EC4;
+    --duo-orange: #FF9600;
+    
+    /* Tonos pasteles */
+    --pastel-blue: #E0F4FF;
+    --pastel-green: #E5F8E0;
+    --pastel-yellow: #FFF4CC;
+    --pastel-pink: #FFE8F0;
+    --pastel-purple: #F4E8FF;
+    
+    /* Grises */
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E5E5E5;
+    --gray-300: #AFAFAF;
+    --gray-700: #4B4B4B;
+    --gray-900: #1F1F1F;
+    
+    /* Sombras gamificadas - más sutiles */
+    --shadow-sm: 0 2px 0 rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 3px 0 rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 0 rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+* {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: var(--gray-50);
+}
+
+/* Botones gamificados */
+.btn-game {
+    font-weight: 700;
+    border-radius: 16px;
+    padding: 14px 24px;
+    border: none;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-game:hover {
+    transform: translateY(-2px);
+}
+
+.btn-game:active {
+    transform: translateY(2px);
+}
+
+.btn-blue {
+    background-color: var(--duo-blue);
+    color: white;
+    box-shadow: 0 3px 0 var(--duo-blue-dark);
+}
+
+.btn-blue:hover {
+    background-color: var(--duo-blue-light);
+    box-shadow: 0 4px 0 var(--duo-blue-dark);
+}
+
+.btn-blue:active {
+    box-shadow: 0 2px 0 var(--duo-blue-dark);
+}
+
+.btn-green {
+    background-color: var(--duo-green);
+    color: white;
+    box-shadow: 0 3px 0 #46A302;
+}
+
+.btn-green:hover {
+    background-color: #89E219;
+    box-shadow: 0 4px 0 #46A302;
+}
+
+.btn-yellow {
+    background-color: var(--duo-yellow);
+    color: var(--gray-900);
+    box-shadow: 0 3px 0 #D9A500;
+}
+
+.btn-yellow:hover {
+    background-color: var(--duo-yellow-light);
+    box-shadow: 0 4px 0 #D9A500;
+}
+
+.btn-red {
+    background-color: var(--duo-red);
+    color: white;
+    box-shadow: 0 3px 0 #CC3333;
+}
+
+/* Cards gamificadas */
+.card-game {
+    background: white;
+    border-radius: 24px;
+    border: 2px solid var(--gray-200);
+    padding: 24px;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 0 var(--gray-200);
+}
+
+.card-game:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 var(--gray-200);
+}
+
+/* Stat Cards gamificadas */
+.stat-game {
+    background: white;
+    border-radius: 20px;
+    border: 2px solid;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-game::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    opacity: 0.3;
+}
+
+.stat-game.blue {
+    border-color: var(--duo-blue);
+    background: linear-gradient(180deg, var(--pastel-blue) 0%, white 40%);
+}
+
+.stat-game.blue::before {
+    background: var(--duo-blue);
+}
+
+.stat-game.green {
+    border-color: var(--duo-green);
+    background: linear-gradient(180deg, var(--pastel-green) 0%, white 40%);
+}
+
+.stat-game.green::before {
+    background: var(--duo-green);
+}
+
+.stat-game.yellow {
+    border-color: var(--duo-yellow);
+    background: linear-gradient(180deg, var(--pastel-yellow) 0%, white 40%);
+}
+
+.stat-game.yellow::before {
+    background: var(--duo-yellow);
+}
+
+.stat-game.pink {
+    border-color: var(--duo-pink);
+    background: linear-gradient(180deg, var(--pastel-pink) 0%, white 40%);
+}
+
+.stat-game.pink::before {
+    background: var(--duo-pink);
+}
+
+.stat-game:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+.stat-game .icon-game {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 28px;
+}
+
+.stat-game.blue .icon-game {
+    background: var(--duo-blue);
+    color: white;
+}
+
+.stat-game.green .icon-game {
+    background: var(--duo-green);
+    color: white;
+}
+
+.stat-game.yellow .icon-game {
+    background: var(--duo-yellow);
+    color: var(--gray-900);
+}
+
+.stat-game.pink .icon-game {
+    background: var(--duo-pink);
+    color: white;
+}
+
+.stat-game .number {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--gray-900);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-game .label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Sidebar gamificado */
+.sidebar-game {
+    background: white;
+    border-right: 2px solid var(--gray-200);
+    box-shadow: 3px 0 0 var(--gray-100);
+}
+
+.sidebar-game .logo-container {
+    background: linear-gradient(135deg, var(--duo-blue) 0%, var(--duo-blue-light) 100%);
+    border-bottom: 2px solid var(--duo-blue-dark);
+    padding: 24px 20px;
+    position: relative;
+}
+
+.sidebar-game .logo-icon {
+    width: 56px;
+    height: 56px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 32px;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-game .logo-text {
+    color: white;
+    font-size: 24px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar-game .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    margin: 6px 12px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.sidebar-game .nav-link:hover {
+    background: var(--gray-100);
+    transform: translateX(4px);
+}
+
+.sidebar-game .nav-link.active {
+    background: var(--duo-blue);
+    color: white;
+    box-shadow: 0 3px 0 var(--duo-blue-dark);
+}
+
+.sidebar-game .nav-link.active:hover {
+    background: var(--duo-blue-light);
+}
+
+.sidebar-game .nav-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.sidebar-game .user-card {
+    background: var(--pastel-blue);
+    border: 2px solid var(--duo-blue);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 12px;
+}
+
+.sidebar-game .user-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--duo-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+    margin-right: 12px;
+    border: 2px solid white;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Header gamificado */
+.header-game {
+    background: white;
+    border-bottom: 2px solid var(--gray-200);
+    padding: 16px 24px;
+}
+
+.header-game .page-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--gray-900);
+}
+
+/* Badge gamificado */
+.badge-game {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid;
+}
+
+.badge-game.blue {
+    background: var(--pastel-blue);
+    border-color: var(--duo-blue);
+    color: var(--duo-blue-dark);
+}
+
+.badge-game.green {
+    background: var(--pastel-green);
+    border-color: var(--duo-green);
+    color: #46A302;
+}
+
+.badge-game.yellow {
+    background: var(--pastel-yellow);
+    border-color: var(--duo-yellow);
+    color: #B38600;
+}
+
+.badge-game.blue {
+    background: var(--pastel-blue);
+    border-color: var(--duo-blue);
+    color: #1391C4;
+}
+
+.badge-game.red {
+    background: #FFE8E8;
+    border-color: var(--duo-red);
+    color: #CC3333;
+}
+
+/* Input gamificado */
+.input-game {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--gray-200);
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-900);
+    transition: all 0.15s ease;
+}
+
+.input-game:focus {
+    outline: none;
+    border-color: var(--duo-blue);
+    box-shadow: 0 0 0 4px rgba(28, 176, 246, 0.1);
+}
+
+/* Modal gamificado */
+.modal-game {
+    background: white;
+    border-radius: 24px;
+    border: 2px solid var(--gray-200);
+    box-shadow: 0 4px 0 var(--gray-200);
+}
+
+.modal-game .modal-header {
+    background: linear-gradient(135deg, var(--duo-blue) 0%, var(--duo-blue-light) 100%);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 22px 22px 0 0;
+    border-bottom: 2px solid var(--duo-blue-dark);
+}
+
+.modal-game .modal-title {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* Tabla gamificada */
+.table-game {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table-game thead th {
+    background: var(--gray-100);
+    padding: 12px 16px;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-700);
+    border: none;
+}
+
+.table-game tbody tr {
+    background: white;
+    border-radius: 16px;
+    transition: all 0.15s ease;
+}
+
+.table-game tbody tr:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-game tbody td {
+    padding: 16px;
+    border-top: 2px solid var(--gray-200);
+    border-bottom: 2px solid var(--gray-200);
+    font-weight: 600;
+}
+
+.table-game tbody td:first-child {
+    border-left: 2px solid var(--gray-200);
+    border-radius: 16px 0 0 16px;
+}
+
+.table-game tbody td:last-child {
+    border-right: 2px solid var(--gray-200);
+    border-radius: 0 16px 16px 0;
+}
+
+/* Animaciones suaves */
+.bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efectos de emoji/sticker */
+.emoji-sticker {
+    font-size: 48px;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* Progress bar gamificado */
+.progress-game {
+    background: var(--gray-200);
+    border-radius: 12px;
+    height: 16px;
+    overflow: hidden;
+    border: 2px solid var(--gray-300);
+}
+
+.progress-game .progress-fill {
+    background: linear-gradient(90deg, var(--duo-blue) 0%, var(--duo-blue-light) 100%);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-game .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Action cards */
+.action-card-game {
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--gray-200);
+}
+
+.action-card-game:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 7px 0 var(--gray-200);
+}
+
+.action-card-game .icon-large {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.action-card-game .title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+}
+
+.action-card-game .description {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+/* Scrollbar gamificado */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-100);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--duo-blue);
+    border-radius: 10px;
+    border: 2px solid var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--duo-blue-dark);
+}
+

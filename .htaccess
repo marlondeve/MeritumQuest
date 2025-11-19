@@ -1,0 +1,22 @@
+# Protección de archivos sensibles
+<FilesMatch "^(config|includes)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Redirección a index.php si no existe el archivo
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Prevenir acceso directo a archivos PHP de configuración
+<Files "database.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
