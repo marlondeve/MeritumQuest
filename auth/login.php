@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <!-- Logo/Header -->
             <div class="text-center mb-8">
-                <img src="<?php echo APP_URL; ?>/assets/avatar/7.png" alt="MeritumQ Mascot" style="width: 120px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                <img src="<?php echo APP_URL; ?>/assets/avatar/4.png" alt="MeritumQ Mascot" style="width: 120px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                 <h1 style="font-size: 36px; font-weight: 900; color: var(--gray-900); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;"><?php echo APP_NAME; ?></h1>
                 <p style="font-size: 16px; font-weight: 600; color: var(--gray-700);">¡Bienvenido de nuevo! 👋 Nuestra mascota está emocionada de verte de vuelta</p>
             </div>

@@ -15,7 +15,7 @@ if (isLoggedIn()) {
     <title><?php echo APP_NAME; ?> - Plataforma de Quizzes y Talleres Interactivos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="<?php echo APP_URL; ?>/assets/css/gamified.css">
+    <link rel="stylesheet" href="assets/css/gamified.css">
     <style>
         .hero-pattern {
             background-image: 
@@ -166,7 +166,9 @@ if (isLoggedIn()) {
     <section id="features" style="padding: 80px 0; background: white;">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 slide-up">
-                <span style="font-size: 64px; margin-bottom: 16px; display: inline-block;">⚡</span>
+                <span style="font-size: 64px; margin-bottom: 16px; display: inline-block;">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/15.png" alt="MeritumQ Mascot" class="static" style="max-width: 100px; width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));">
+                </span>
                 <h2 style="font-size: 48px; font-weight: 900; color: var(--gray-900); margin-bottom: 16px;">
                     ¿Qué hace MeritumQ?
                 </h2>
@@ -177,7 +179,7 @@ if (isLoggedIn()) {
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="feature-card bounce-in" style="animation-delay: 0.1s;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/2.png" alt="Quizzes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/5.png" alt="Quizzes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Quizzes Dinámicos
                     </h3>
@@ -187,7 +189,7 @@ if (isLoggedIn()) {
                 </div>
 
                 <div class="feature-card bounce-in" style="animation-delay: 0.2s;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/3.png" alt="Talleres" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/17.png" alt="Talleres" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Talleres Organizados
                     </h3>
@@ -197,7 +199,7 @@ if (isLoggedIn()) {
                 </div>
 
                 <div class="feature-card bounce-in" style="animation-delay: 0.3s;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/4.png" alt="QR Codes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/16.png" alt="QR Codes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Códigos QR
                     </h3>
@@ -213,7 +215,9 @@ if (isLoggedIn()) {
     <section style="padding: 80px 0; background: var(--gray-50);">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 slide-up">
-                <span style="font-size: 64px; margin-bottom: 16px; display: inline-block;">🎮</span>
+                <span style="font-size: 64px; margin-bottom: 16px; display: inline-block;">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/9.png" alt="MeritumQ Mascot" class="static" style="max-width: 150px; width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));">
+                </span>
                 <h2 style="font-size: 48px; font-weight: 900; color: var(--gray-900); margin-bottom: 16px;">
                     ¿Cómo Funciona?
                 </h2>
@@ -408,7 +412,7 @@ if (isLoggedIn()) {
     <section style="padding: 100px 0; background: linear-gradient(135deg, var(--duo-blue) 0%, var(--duo-blue-light) 100%); color: white;">
         <div class="container mx-auto px-6 text-center">
             <div class="bounce-in">
-                <img src="<?php echo APP_URL; ?>/assets/avatar/6.png" alt="¡Comienza ahora!" style="max-width: 200px; width: 100%; height: auto; margin: 0 auto 24px; display: block; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));">
+                <img src="<?php echo APP_URL; ?>/assets/avatar/14.png" alt="¡Comienza ahora!" style="max-width: 200px; width: 100%; height: auto; margin: 0 auto 24px; display: block; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));">
                 <h2 style="font-size: 48px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">
                     ¿Listo para Comenzar?
                 </h2>

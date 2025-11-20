@@ -39,7 +39,7 @@ $quizzes = $stmt->fetchAll();
             <div class="mb-6 slide-up">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-3">
-                        <img src="<?php echo APP_URL; ?>/assets/avatar/13.png" alt="Quizzes" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/7.png" alt="Quizzes" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
                         <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Quizzes</h1>
                     </div>
                     <button onclick="openQuizModal()" class="btn-game btn-blue">
@@ -48,7 +48,7 @@ $quizzes = $stmt->fetchAll();
                 </div>
                 <div class="card-game" style="background: var(--pastel-blue); border-color: var(--duo-blue); padding: 16px; margin-bottom: 16px;">
                     <div class="flex items-start space-x-3">
-                        <img src="<?php echo APP_URL; ?>/assets/avatar/14.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/15.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
                         <div>
                             <p style="font-size: 14px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
                                 <strong>¿Qué es esta sección?</strong><br>
@@ -143,7 +143,7 @@ $quizzes = $stmt->fetchAll();
             <div class="modal-header">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <img src="<?php echo APP_URL; ?>/assets/avatar/10.png" alt="Crear Quiz" style="width: 50px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/13.png" alt="Crear Quiz" style="width: 50px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));">
                         <h2 id="modalTitle" class="modal-title">
                             <span id="modalTitleText">CREAR QUIZ</span>
                         </h2>
