@@ -26,17 +26,17 @@ if (isLoggedIn()) {
         
         .feature-card {
             background: white;
-            border: 2px solid var(--gray-200);
+            border: 2px solid #E5E5E5;
             border-radius: 24px;
             padding: 32px;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 0 var(--gray-200);
+            box-shadow: 0 3px 0 #E5E5E5;
         }
         
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 11px 0 var(--gray-200);
+            box-shadow: 0 11px 0 #E5E5E5;
         }
         
         .floating {
@@ -46,6 +46,23 @@ if (isLoggedIn()) {
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
+        }
+        
+        /* Asegurar que las variables CSS funcionen */
+        :root {
+            --duo-blue: #1CB0F6;
+            --duo-blue-dark: #1391C4;
+            --duo-blue-light: #4FC3F7;
+            --duo-green: #58CC02;
+            --duo-yellow: #FFC800;
+            --duo-yellow-light: #FFD900;
+            --duo-pink: #FF9EC4;
+            --gray-50: #FAFAFA;
+            --gray-200: #E5E5E5;
+            --gray-300: #AFAFAF;
+            --gray-400: #8B8B8B;
+            --gray-700: #4B4B4B;
+            --gray-900: #1F1F1F;
         }
     </style>
 </head>
@@ -90,13 +107,29 @@ if (isLoggedIn()) {
                     <p style="font-size: 20px; font-weight: 600; color: var(--gray-700); margin-bottom: 32px; line-height: 1.6;">
                         La plataforma todo-en-uno para gestionar cuestionarios, organizar talleres y generar códigos QR. ¡Gamifica la educación! 🚀
                     </p>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-4 items-end">
                         <a href="auth/register.php" class="btn-game btn-blue" style="padding: 18px 32px; font-size: 16px;">
                             ✨ COMENZAR GRATIS
                         </a>
-                        <a href="#features" class="btn-game" style="background: white; color: var(--gray-900); padding: 18px 32px; font-size: 16px; box-shadow: 0 3px 0 var(--gray-200);">
-                            📖 CONOCER MÁS
-                        </a>
+                        <div style="flex: 1; min-width: 280px;">
+                            <label style="display: block; font-size: 14px; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                🔑 Ingresa el código del Quiz
+                            </label>
+                            <form id="joinQuizForm" onsubmit="joinQuiz(event)" style="display: flex; gap: 8px;">
+                                <input 
+                                    type="text" 
+                                    id="quizCode" 
+                                    name="code" 
+                                    placeholder="Ej: QUIZ-ABC123" 
+                                    required
+                                    class="input-game" 
+                                    style="flex: 1; font-family: monospace; font-weight: 700; text-transform: uppercase;"
+                                    maxlength="20">
+                                <button type="submit" class="btn-game btn-green" style="padding: 18px 24px; font-size: 16px; white-space: nowrap;">
+                                    🚀 ENTRAR
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div style="margin-top: 32px; display: flex; align-items: center; gap: 24px; font-weight: 700; color: var(--gray-700);">
                         <div style="text-align: center;">
@@ -115,14 +148,12 @@ if (isLoggedIn()) {
                 </div>
                 
                 <div class="bounce-in" style="animation-delay: 0.3s;">
-                    <div style="position: relative;">
-                        <div class="emoji-sticker floating" style="font-size: 300px; text-align: center;">
-                            🎯
-                        </div>
-                        <div class="emoji-sticker" style="position: absolute; top: 20%; left: -10%; font-size: 60px; animation-delay: 0.5s;">
+                    <div style="position: relative; text-align: center;">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/1.png" alt="MeritumQ Mascot" class="floating" style="max-width: 400px; width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));">
+                        <div class="emoji-sticker" style="position: absolute; top: 10%; left: -5%; font-size: 60px; animation-delay: 0.5s;">
                             ✨
                         </div>
-                        <div class="emoji-sticker" style="position: absolute; top: 60%; right: -5%; font-size: 60px; animation-delay: 1s;">
+                        <div class="emoji-sticker" style="position: absolute; top: 70%; right: -5%; font-size: 60px; animation-delay: 1s;">
                             🚀
                         </div>
                     </div>
@@ -146,32 +177,32 @@ if (isLoggedIn()) {
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="feature-card bounce-in" style="animation-delay: 0.1s;">
-                    <div class="emoji-sticker" style="font-size: 72px; margin-bottom: 20px;">❓</div>
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/2.png" alt="Quizzes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Quizzes Dinámicos
                     </h3>
                     <p style="font-size: 16px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
-                        Crea cuestionarios con múltiples opciones, personaliza puntos y genera códigos únicos de acceso
+                        Crea cuestionarios con múltiples opciones, personaliza puntos y genera códigos únicos de acceso. ¡Haz que el aprendizaje sea divertido y gamificado!
                     </p>
                 </div>
 
                 <div class="feature-card bounce-in" style="animation-delay: 0.2s;">
-                    <div class="emoji-sticker" style="font-size: 72px; margin-bottom: 20px;">📚</div>
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/3.png" alt="Talleres" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Talleres Organizados
                     </h3>
                     <p style="font-size: 16px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
-                        Gestiona talleres con fechas, límites de participantes y controla la disponibilidad
+                        Gestiona talleres con fechas, límites de participantes y controla la disponibilidad. Organiza tus eventos educativos de manera profesional.
                     </p>
                 </div>
 
                 <div class="feature-card bounce-in" style="animation-delay: 0.3s;">
-                    <div class="emoji-sticker" style="font-size: 72px; margin-bottom: 20px;">🔳</div>
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/4.png" alt="QR Codes" style="width: 120px; height: auto; margin: 0 auto 20px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <h3 style="font-size: 24px; font-weight: 900; color: var(--gray-900); margin-bottom: 12px;">
                         Códigos QR
                     </h3>
                     <p style="font-size: 16px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
-                        Genera códigos QR automáticamente para compartir tus quizzes y talleres fácilmente
+                        Genera códigos QR automáticamente para compartir tus quizzes y talleres fácilmente. Acceso rápido y sencillo para todos.
                     </p>
                 </div>
             </div>
@@ -247,10 +278,8 @@ if (isLoggedIn()) {
     <section style="padding: 80px 0; background: white;">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="slide-up">
-                    <div class="emoji-sticker" style="font-size: 200px; text-align: center;">
-                        📱
-                    </div>
+                <div class="slide-up" style="text-align: center;">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/5.png" alt="Características" style="max-width: 300px; width: 100%; height: auto; margin: 0 auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));">
                 </div>
 
                 <div class="slide-up" style="animation-delay: 0.2s;">
@@ -379,12 +408,12 @@ if (isLoggedIn()) {
     <section style="padding: 100px 0; background: linear-gradient(135deg, var(--duo-blue) 0%, var(--duo-blue-light) 100%); color: white;">
         <div class="container mx-auto px-6 text-center">
             <div class="bounce-in">
-                <span style="font-size: 80px; margin-bottom: 24px; display: inline-block;">🚀</span>
+                <img src="<?php echo APP_URL; ?>/assets/avatar/6.png" alt="¡Comienza ahora!" style="max-width: 200px; width: 100%; height: auto; margin: 0 auto 24px; display: block; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));">
                 <h2 style="font-size: 48px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">
                     ¿Listo para Comenzar?
                 </h2>
                 <p style="font-size: 22px; font-weight: 600; margin-bottom: 40px; opacity: 0.95;">
-                    Únete a MeritumQ y transforma la forma en que enseñas y aprendes
+                    Únete a MeritumQ y transforma la forma en que enseñas y aprendes. ¡Nuestra mascota está lista para acompañarte en esta aventura educativa!
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center">
                     <a href="auth/register.php" class="btn-game btn-green" style="padding: 20px 40px; font-size: 18px;">
@@ -456,6 +485,17 @@ if (isLoggedIn()) {
                 }
             });
         });
+        
+        // Función para unirse a un quiz con código
+        function joinQuiz(event) {
+            event.preventDefault();
+            const codeInput = document.getElementById('quizCode');
+            const code = codeInput.value.trim().toUpperCase();
+            
+            if (code) {
+                window.location.href = 'join.php?code=' + encodeURIComponent(code);
+            }
+        }
     </script>
 </body>
 </html>

@@ -40,13 +40,6 @@ $current_user = getCurrentUser();
             <span>Mis Talleres</span>
         </a>
         
-        <a href="<?php echo APP_URL; ?>/dashboard/qr-codes.php" 
-           class="nav-link <?php echo $current_page === 'qr-codes.php' ? 'active' : ''; ?>">
-            <div class="nav-icon">
-                <span style="font-size: 24px;">🔳</span>
-            </div>
-            <span>Códigos QR</span>
-        </a>
         
         <?php if ($is_admin): ?>
             <div class="px-4 pt-6 mt-4 border-t-2 border-gray-200">

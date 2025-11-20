@@ -64,11 +64,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body style="background: linear-gradient(135deg, #E0F4FF 0%, #FFF4CC 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;">
     <div class="w-full max-w-md bounce-in">
         <div class="card-game" style="padding: 40px;">
+            <!-- Botón para regresar -->
+            <div class="mb-6">
+                <a href="<?php echo APP_URL; ?>/index.php" class="btn-game" style="background: var(--gray-200); color: var(--gray-700); padding: 10px 20px; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    ← Volver al Inicio
+                </a>
+            </div>
+            
             <!-- Logo/Header -->
             <div class="text-center mb-8">
-                <div class="emoji-sticker" style="font-size: 80px; margin-bottom: 16px;">🎓</div>
+                <img src="<?php echo APP_URL; ?>/assets/avatar/7.png" alt="MeritumQ Mascot" style="width: 120px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                 <h1 style="font-size: 36px; font-weight: 900; color: var(--gray-900); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;"><?php echo APP_NAME; ?></h1>
-                <p style="font-size: 16px; font-weight: 600; color: var(--gray-700);">¡Bienvenido de nuevo! 👋</p>
+                <p style="font-size: 16px; font-weight: 600; color: var(--gray-700);">¡Bienvenido de nuevo! 👋 Nuestra mascota está emocionada de verte de vuelta</p>
             </div>
 
             <!-- Formulario -->

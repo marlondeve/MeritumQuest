@@ -46,6 +46,7 @@ $qr_code = $qrStmt->fetch();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo APP_URL; ?>/assets/css/gamified.css">
+    <?php include '../includes/qr-modal.php'; ?>
 </head>
 <body style="background: #FAFAFA;">
     <?php include '../includes/header.php'; ?>
@@ -84,9 +85,9 @@ $qr_code = $qrStmt->fetch();
                         </div>
                     </div>
                     <div class="flex space-x-2">
-                        <a href="qr-codes.php?generate=workshop&id=<?php echo $workshop['id']; ?>" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                            <i class="fas fa-qrcode mr-2"></i>Ver QR
-                        </a>
+                        <button onclick="openQRModal('workshop', <?php echo $workshop['id']; ?>)" class="btn-game btn-green" style="padding: 10px 20px; font-size: 12px;">
+                            🔳 VER QR
+                        </button>
                         <button onclick="editWorkshop(<?php echo $workshop['id']; ?>)" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
                             <i class="fas fa-edit mr-2"></i>Editar
                         </button>
@@ -156,7 +157,7 @@ $qr_code = $qrStmt->fetch();
                     <div class="text-center py-8 text-gray-500">
                         <i class="fas fa-qrcode text-4xl mb-4"></i>
                         <p class="mb-4">No hay código QR generado</p>
-                        <a href="qr-codes.php?generate=workshop&id=<?php echo $workshop['id']; ?>" class="text-purple-600 hover:text-purple-800 font-medium">
+                        <button onclick="openQRModal('workshop', <?php echo $workshop['id']; ?>)" class="text-purple-600 hover:text-purple-800 font-medium" style="background: none; border: none; cursor: pointer;">
                             Generar código QR
                         </a>
                     </div>

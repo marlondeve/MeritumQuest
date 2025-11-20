@@ -28,6 +28,7 @@ $quizzes = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo APP_URL; ?>/assets/css/gamified.css">
+    <?php include '../includes/qr-modal.php'; ?>
 </head>
 <body style="background: #FAFAFA;">
     <?php include '../includes/header.php'; ?>
@@ -35,63 +36,93 @@ $quizzes = $stmt->fetchAll();
     
     <main class="ml-64 pt-4 p-8">
         <div class="container mx-auto">
-            <div class="flex items-center justify-between mb-6 slide-up">
-                <div class="flex items-center space-x-3">
-                    <span style="font-size: 48px;">❓</span>
-                    <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Quizzes</h1>
+            <div class="mb-6 slide-up">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/13.png" alt="Quizzes" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
+                        <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Quizzes</h1>
+                    </div>
+                    <button onclick="openQuizModal()" class="btn-game btn-blue">
+                        ➕ CREAR QUIZ
+                    </button>
                 </div>
-                <button onclick="openQuizModal()" class="btn-game btn-blue">
-                    ➕ CREAR QUIZ
-                </button>
+                <div class="card-game" style="background: var(--pastel-blue); border-color: var(--duo-blue); padding: 16px; margin-bottom: 16px;">
+                    <div class="flex items-start space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/14.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
+                                <strong>¿Qué es esta sección?</strong><br>
+                                Aquí puedes gestionar todos tus quizzes. Crea cuestionarios interactivos con preguntas de opción múltiple, configura puntos por pregunta, y genera códigos únicos para compartir. Cada quiz puede tener múltiples preguntas y opciones de respuesta correcta.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="card-game slide-up">
                 <?php if (empty($quizzes)): ?>
                     <div class="text-center py-12">
-                        <div class="emoji-sticker" style="font-size: 80px; margin-bottom: 16px;">📭</div>
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/14.png" alt="Sin quizzes" style="width: 120px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                         <p style="font-size: 20px; font-weight: 700; color: var(--gray-700); margin-bottom: 8px;">No hay quizzes aún</p>
-                        <p style="font-size: 16px; font-weight: 600; color: var(--gray-500); margin-bottom: 24px;">¡Crea tu primer quiz y comienza!</p>
+                        <p style="font-size: 16px; font-weight: 600; color: var(--gray-500); margin-bottom: 24px;">¡Crea tu primer quiz y comienza a evaluar!</p>
                         <button onclick="openQuizModal()" class="btn-game btn-blue">
                             ✨ CREAR PRIMER QUIZ
                         </button>
                     </div>
                 <?php else: ?>
-                    <div class="overflow-x-auto modern-table rounded-xl">
-                        <table class="w-full">
+                    <div class="overflow-x-auto">
+                        <table class="table-game">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Código</th>
-                                    <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Título</th>
+                                    <th>Código</th>
+                                    <th>Título</th>
                                     <?php if ($is_admin): ?>
-                                    <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Creado por</th>
+                                    <th>Creado por</th>
                                     <?php endif; ?>
-                                    <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Fecha</th>
-                                    <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Acciones</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($quizzes as $index => $quiz): ?>
-                                <tr class="slide-in-right" style="animation-delay: <?php echo $index * 0.05; ?>s;">
-                                    <td class="px-6 py-4">
-                                        <span class="font-mono text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"><?php echo htmlspecialchars($quiz['code']); ?></span>
+                                <tr class="bounce-in quiz-row" 
+                                    style="animation-delay: <?php echo $index * 0.05; ?>s; cursor: pointer;"
+                                    onclick="window.location.href='quiz-view.php?id=<?php echo $quiz['id']; ?>'"
+                                    onmouseover="this.style.backgroundColor='var(--pastel-blue)'; this.style.transform='translateX(4px)';"
+                                    onmouseout="this.style.backgroundColor='white'; this.style.transform='translateX(0)';">
+                                    <td>
+                                        <span style="font-family: monospace; font-size: 13px; font-weight: 700; color: var(--duo-blue);"><?php echo htmlspecialchars($quiz['code']); ?></span>
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-gray-800"><?php echo htmlspecialchars($quiz['title']); ?></td>
+                                    <td>
+                                        <div>
+                                            <div style="font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px;"><?php echo htmlspecialchars($quiz['title']); ?></div>
+                                            <?php if (!empty($quiz['description'])): ?>
+                                            <div style="font-size: 12px; font-weight: 600; color: var(--gray-500); line-height: 1.3;"><?php echo htmlspecialchars(mb_substr($quiz['description'], 0, 60)) . (mb_strlen($quiz['description']) > 60 ? '...' : ''); ?></div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
                                     <?php if ($is_admin): ?>
-                                    <td class="px-6 py-4 text-sm text-gray-600"><?php echo htmlspecialchars($quiz['full_name'] ?? $quiz['username']); ?></td>
+                                    <td style="font-size: 14px; font-weight: 600; color: var(--gray-700);"><?php echo htmlspecialchars($quiz['full_name'] ?? $quiz['username']); ?></td>
                                     <?php endif; ?>
-                                    <td class="px-6 py-4 text-sm text-gray-600"><?php echo date('d/m/Y H:i', strtotime($quiz['created_at'])); ?></td>
-                                    <td class="px-6 py-4">
+                                    <td style="font-size: 13px; font-weight: 600; color: var(--gray-600);"><?php echo date('d/m/Y', strtotime($quiz['created_at'])); ?></td>
+                                    <td onclick="event.stopPropagation();">
                                         <div class="flex items-center space-x-2">
-                                            <a href="quiz-view.php?id=<?php echo $quiz['id']; ?>" class="w-9 h-9 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 hover:scale-110 transition-all duration-300 icon-hover" title="Ver detalles">
-                                                <i class="fas fa-eye text-sm"></i>
-                                            </a>
-                                            <a href="qr-codes.php?generate=quiz&id=<?php echo $quiz['id']; ?>" class="w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300 icon-hover" title="Generar QR">
+                                            <button onclick="event.stopPropagation(); openQRModal('quiz', <?php echo $quiz['id']; ?>);" 
+                                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300" 
+                                                    title="Ver QR" 
+                                                    style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-qrcode text-sm"></i>
-                                            </a>
-                                            <button onclick="editQuiz(<?php echo $quiz['id']; ?>)" class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 hover:scale-110 transition-all duration-300 icon-hover" title="Editar">
+                                            </button>
+                                            <button onclick="event.stopPropagation(); editQuiz(<?php echo $quiz['id']; ?>);" 
+                                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 hover:scale-110 transition-all duration-300" 
+                                                    title="Editar" 
+                                                    style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-edit text-sm"></i>
                                             </button>
-                                            <button onclick="deleteQuiz(<?php echo $quiz['id']; ?>)" class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-100 text-red-600 hover:bg-red-200 hover:scale-110 transition-all duration-300 icon-hover" title="Eliminar">
+                                            <button onclick="event.stopPropagation(); deleteQuiz(<?php echo $quiz['id']; ?>);" 
+                                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-100 text-red-600 hover:bg-red-200 hover:scale-110 transition-all duration-300" 
+                                                    title="Eliminar" 
+                                                    style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-trash text-sm"></i>
                                             </button>
                                         </div>
@@ -111,10 +142,12 @@ $quizzes = $stmt->fetchAll();
         <div class="modal-game max-w-2xl w-full max-h-[90vh] overflow-y-auto bounce-in">
             <div class="modal-header">
                 <div class="flex items-center justify-between">
-                    <h2 id="modalTitle" class="modal-title flex items-center">
-                        <span style="font-size: 28px; margin-right: 12px;">❓</span>
-                        <span id="modalTitleText">CREAR QUIZ</span>
-                    </h2>
+                    <div class="flex items-center space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/10.png" alt="Crear Quiz" style="width: 50px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));">
+                        <h2 id="modalTitle" class="modal-title">
+                            <span id="modalTitleText">CREAR QUIZ</span>
+                        </h2>
+                    </div>
                     <button onclick="closeQuizModal()" class="text-white hover:opacity-80 transition-opacity" style="font-size: 28px; font-weight: 700;">
                         ✕
                     </button>
@@ -170,10 +203,10 @@ $quizzes = $stmt->fetchAll();
             document.getElementById('points_per_question').value = '100';
             
             if (quizId) {
-                title.innerHTML = '<i class="fas fa-edit mr-2"></i>Editar Quiz';
+                document.getElementById('modalTitleText').textContent = 'EDITAR QUIZ';
                 loadQuizData(quizId);
             } else {
-                title.innerHTML = '<i class="fas fa-plus mr-2"></i>Crear Nuevo Quiz';
+                document.getElementById('modalTitleText').textContent = 'CREAR QUIZ';
             }
             
             modal.classList.remove('hidden');

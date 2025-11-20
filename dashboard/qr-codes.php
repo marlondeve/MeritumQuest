@@ -81,9 +81,22 @@ $qr_codes = $stmt->fetchAll();
     
     <main class="ml-64 pt-4 p-8">
         <div class="container mx-auto">
-            <div class="flex items-center space-x-3 mb-6 slide-up">
-                <span style="font-size: 48px;">🔳</span>
-                <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Códigos QR</h1>
+            <div class="mb-6 slide-up">
+                <div class="flex items-center space-x-3 mb-4">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/17.png" alt="QR Codes" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
+                    <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Códigos QR</h1>
+                </div>
+                <div class="card-game" style="background: var(--pastel-yellow); border-color: var(--duo-yellow); padding: 16px; margin-bottom: 16px;">
+                    <div class="flex items-start space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/1.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
+                                <strong>¿Qué es esta sección?</strong><br>
+                                Aquí encontrarás todos los códigos QR generados para tus quizzes y talleres. Puedes descargarlos, copiarlos o compartirlos fácilmente. Los códigos QR permiten acceso rápido a tus contenidos educativos con un simple escaneo desde cualquier dispositivo móvil.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="card-game slide-up">

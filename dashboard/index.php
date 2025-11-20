@@ -74,6 +74,7 @@ $recent_quizzes = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo APP_URL; ?>/assets/css/gamified.css">
+    <?php include '../includes/qr-modal.php'; ?>
 </head>
 <body style="background: #FAFAFA;">
     <?php include '../includes/header.php'; ?>
@@ -86,15 +87,14 @@ $recent_quizzes = $stmt->fetchAll();
                 <div class="card-game" style="background: linear-gradient(135deg, #1CB0F6 0%, #4FC3F7 100%); color: white; border-color: #1391C4;">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
-                            <div class="emoji-sticker" style="font-size: 64px;">👋</div>
+                            <img src="<?php echo APP_URL; ?>/assets/avatar/9.png" alt="Bienvenido" style="width: 100px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));">
                             <div>
                                 <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 4px;">
                                     ¡Hola, <?php echo htmlspecialchars($current_user['full_name'] ?? $current_user['username']); ?>!
                                 </h1>
-                                <p style="font-size: 18px; font-weight: 600; opacity: 0.9;">¡Sigue aprendiendo y enseñando! 🚀</p>
+                                <p style="font-size: 18px; font-weight: 600; opacity: 0.9;">¡Sigue aprendiendo y enseñando! 🚀 Este es tu centro de control donde puedes gestionar todos tus quizzes, talleres y códigos QR.</p>
                             </div>
                         </div>
-                        <div class="emoji-sticker" style="font-size: 80px;">🎯</div>
                     </div>
                 </div>
             </div>
@@ -102,25 +102,17 @@ $recent_quizzes = $stmt->fetchAll();
             <!-- Tarjetas de Estadísticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="stat-game blue bounce-in" style="animation-delay: 0.1s;">
-                    <div class="icon-game">
-                        <span style="font-size: 32px;">❓</span>
-                    </div>
                     <div class="number"><?php echo $stats['quizzes']; ?></div>
                     <div class="label">Quizzes</div>
                 </div>
 
                 <div class="stat-game green bounce-in" style="animation-delay: 0.2s;">
-                    <div class="icon-game">
-                        <span style="font-size: 32px;">📚</span>
-                    </div>
                     <div class="number"><?php echo $stats['workshops']; ?></div>
                     <div class="label">Talleres</div>
                 </div>
 
                 <div class="stat-game yellow bounce-in" style="animation-delay: 0.3s;">
-                    <div class="icon-game">
-                        <span style="font-size: 32px;">🔳</span>
-                    </div>
+
                     <div class="number"><?php echo $stats['qr_codes']; ?></div>
                     <div class="label">Códigos QR</div>
                 </div>
@@ -139,31 +131,31 @@ $recent_quizzes = $stmt->fetchAll();
             <!-- Acciones Rápidas -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <button onclick="openQuizModal()" class="action-card-game slide-up" style="animation-delay: 0.1s;">
-                    <div class="icon-large">❓</div>
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/10.png" alt="Crear Quiz" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <div class="title">Crear Quiz</div>
-                    <div class="description">Crea un nuevo cuestionario divertido</div>
+                    <div class="description">Crea cuestionarios interactivos con preguntas, opciones múltiples y sistema de puntos. ¡Haz que el aprendizaje sea divertido!</div>
                     <div style="margin-top: 16px;">
                         <div class="btn-game btn-blue" style="width: 100%; padding: 12px;">¡EMPEZAR!</div>
                     </div>
                 </button>
 
                 <button onclick="openWorkshopModal()" class="action-card-game slide-up" style="animation-delay: 0.2s;">
-                    <div class="icon-large">📚</div>
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/11.png" alt="Crear Taller" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <div class="title">Crear Taller</div>
-                    <div class="description">Organiza un taller educativo</div>
+                    <div class="description">Organiza talleres educativos con fechas, límites de participantes y control de disponibilidad. Gestiona tus eventos fácilmente.</div>
                     <div style="margin-top: 16px;">
                         <div class="btn-game btn-green" style="width: 100%; padding: 12px;">¡COMENZAR!</div>
                     </div>
                 </button>
 
-                <a href="qr-codes.php" class="action-card-game slide-up" style="animation-delay: 0.3s; display: block; text-decoration: none;">
-                    <div class="icon-large">🔳</div>
-                    <div class="title">Ver Códigos QR</div>
-                    <div class="description">Gestiona tus códigos QR</div>
+                <div class="action-card-game slide-up" style="animation-delay: 0.3s; cursor: default;">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/12.png" alt="Códigos QR" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <div class="title">Códigos QR</div>
+                    <div class="description">Genera y comparte códigos QR desde tus quizzes y talleres. Haz clic en el botón QR de cualquier elemento para verlo.</div>
                     <div style="margin-top: 16px;">
-                        <div class="btn-game btn-yellow" style="width: 100%; padding: 12px;">VER CÓDIGOS</div>
+                        <div class="btn-game btn-yellow" style="width: 100%; padding: 12px; opacity: 0.7;">INFO</div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Quizzes Recientes -->
@@ -202,7 +194,11 @@ $recent_quizzes = $stmt->fetchAll();
                             </thead>
                             <tbody>
                                 <?php foreach ($recent_quizzes as $index => $quiz): ?>
-                                <tr class="slide-in-right" style="animation-delay: <?php echo $index * 0.1; ?>s;">
+                                <tr class="slide-in-right quiz-row" 
+                                    style="animation-delay: <?php echo $index * 0.1; ?>s; cursor: pointer;"
+                                    onclick="window.location.href='quiz-view.php?id=<?php echo $quiz['id']; ?>'"
+                                    onmouseover="this.style.backgroundColor='var(--pastel-blue)'; this.style.transform='translateX(4px)';"
+                                    onmouseout="this.style.backgroundColor='white'; this.style.transform='translateX(0)';">
                                     <td class="px-6 py-4">
                                         <span class="font-mono text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"><?php echo htmlspecialchars($quiz['code']); ?></span>
                                     </td>
@@ -211,15 +207,12 @@ $recent_quizzes = $stmt->fetchAll();
                                     <td class="px-6 py-4 text-sm text-gray-600"><?php echo htmlspecialchars($quiz['full_name'] ?? $quiz['username']); ?></td>
                                     <?php endif; ?>
                                     <td class="px-6 py-4 text-sm text-gray-600"><?php echo date('d/m/Y', strtotime($quiz['created_at'])); ?></td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4" onclick="event.stopPropagation();">
                                         <div class="flex items-center space-x-3">
-                                            <a href="quiz-view.php?id=<?php echo $quiz['id']; ?>" class="w-8 h-8 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 hover:scale-110 transition-all duration-300 icon-hover" title="Ver detalles">
-                                                <i class="fas fa-eye text-sm"></i>
-                                            </a>
-                                            <a href="qr-codes.php?generate=quiz&id=<?php echo $quiz['id']; ?>" class="w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300 icon-hover" title="Generar QR">
+                                            <button onclick="event.stopPropagation(); openQRModal('quiz', <?php echo $quiz['id']; ?>);" class="w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300" title="Ver QR" style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-qrcode text-sm"></i>
-                                            </a>
-                                            <a href="quizzes.php" class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 hover:scale-110 transition-all duration-300 icon-hover" title="Editar">
+                                            </button>
+                                            <a href="quizzes.php" onclick="event.stopPropagation();" class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 hover:scale-110 transition-all duration-300" title="Editar" style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-edit text-sm"></i>
                                             </a>
                                         </div>

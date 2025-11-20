@@ -28,6 +28,7 @@ $workshops = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo APP_URL; ?>/assets/css/gamified.css">
+    <?php include '../includes/qr-modal.php'; ?>
 </head>
 <body style="background: #FAFAFA;">
     <?php include '../includes/header.php'; ?>
@@ -35,14 +36,27 @@ $workshops = $stmt->fetchAll();
     
     <main class="ml-64 pt-4 p-8">
         <div class="container mx-auto">
-            <div class="flex items-center justify-between mb-6 slide-up">
-                <div class="flex items-center space-x-3">
-                    <span style="font-size: 48px;">📚</span>
-                    <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Talleres</h1>
+            <div class="mb-6 slide-up">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/15.png" alt="Talleres" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
+                        <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Talleres</h1>
+                    </div>
+                    <button onclick="openWorkshopModal()" class="btn-game btn-green">
+                        ➕ CREAR TALLER
+                    </button>
                 </div>
-                <button onclick="openWorkshopModal()" class="btn-game btn-green">
-                    ➕ CREAR TALLER
-                </button>
+                <div class="card-game" style="background: var(--pastel-green); border-color: var(--duo-green); padding: 16px; margin-bottom: 16px;">
+                    <div class="flex items-start space-x-3">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/16.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
+                                <strong>¿Qué es esta sección?</strong><br>
+                                Gestiona tus talleres educativos aquí. Organiza eventos con fechas de inicio y fin, establece límites de participantes, y controla la disponibilidad. Los talleres te permiten estructurar actividades educativas más complejas que los quizzes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="card-game slide-up">
@@ -91,9 +105,9 @@ $workshops = $stmt->fetchAll();
                                             <a href="workshop-view.php?id=<?php echo $workshop['id']; ?>" class="w-9 h-9 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 hover:scale-110 transition-all duration-300 icon-hover" title="Ver detalles">
                                                 <i class="fas fa-eye text-sm"></i>
                                             </a>
-                                            <a href="qr-codes.php?generate=workshop&id=<?php echo $workshop['id']; ?>" class="w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300 icon-hover" title="Generar QR">
+                                            <button onclick="openQRModal('workshop', <?php echo $workshop['id']; ?>)" class="w-9 h-9 flex items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:scale-110 transition-all duration-300 icon-hover" title="Ver QR" style="box-shadow: 0 2px 0 rgba(0,0,0,0.1);">
                                                 <i class="fas fa-qrcode text-sm"></i>
-                                            </a>
+                                            </button>
                                             <button onclick="editWorkshop(<?php echo $workshop['id']; ?>)" class="w-9 h-9 flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 hover:scale-110 transition-all duration-300 icon-hover" title="Editar">
                                                 <i class="fas fa-edit text-sm"></i>
                                             </button>
