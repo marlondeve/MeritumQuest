@@ -39,7 +39,7 @@ $workshops = $stmt->fetchAll();
             <div class="mb-6 slide-up">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-3">
-                        <img src="<?php echo APP_URL; ?>/assets/avatar/15.png" alt="Talleres" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/10.png" alt="Talleres" style="width: 60px; height: auto; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));">
                         <h1 style="font-size: 32px; font-weight: 900; color: var(--gray-900);">Mis Talleres</h1>
                     </div>
                     <button onclick="openWorkshopModal()" class="btn-game btn-green">
@@ -48,7 +48,7 @@ $workshops = $stmt->fetchAll();
                 </div>
                 <div class="card-game" style="background: var(--pastel-green); border-color: var(--duo-green); padding: 16px; margin-bottom: 16px;">
                     <div class="flex items-start space-x-3">
-                        <img src="<?php echo APP_URL; ?>/assets/avatar/16.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
+                        <img src="<?php echo APP_URL; ?>/assets/avatar/15.png" alt="Info" style="width: 50px; height: auto; flex-shrink: 0;">
                         <div>
                             <p style="font-size: 14px; font-weight: 600; color: var(--gray-700); line-height: 1.6;">
                                 <strong>¿Qué es esta sección?</strong><br>

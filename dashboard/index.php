@@ -87,7 +87,7 @@ $recent_quizzes = $stmt->fetchAll();
                 <div class="card-game" style="background: linear-gradient(135deg, #1CB0F6 0%, #4FC3F7 100%); color: white; border-color: #1391C4;">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
-                            <img src="<?php echo APP_URL; ?>/assets/avatar/9.png" alt="Bienvenido" style="width: 100px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));">
+                            <img src="<?php echo APP_URL; ?>/assets/avatar/2.png" alt="Bienvenido" style="width: 100px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));">
                             <div>
                                 <h1 style="font-size: 36px; font-weight: 900; margin-bottom: 4px;">
                                     ¡Hola, <?php echo htmlspecialchars($current_user['full_name'] ?? $current_user['username']); ?>!
@@ -131,7 +131,7 @@ $recent_quizzes = $stmt->fetchAll();
             <!-- Acciones Rápidas -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <button onclick="openQuizModal()" class="action-card-game slide-up" style="animation-delay: 0.1s;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/10.png" alt="Crear Quiz" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/17.png" alt="Crear Quiz" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <div class="title">Crear Quiz</div>
                     <div class="description">Crea cuestionarios interactivos con preguntas, opciones múltiples y sistema de puntos. ¡Haz que el aprendizaje sea divertido!</div>
                     <div style="margin-top: 16px;">
@@ -140,7 +140,7 @@ $recent_quizzes = $stmt->fetchAll();
                 </button>
 
                 <button onclick="openWorkshopModal()" class="action-card-game slide-up" style="animation-delay: 0.2s;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/11.png" alt="Crear Taller" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/12.png" alt="Crear Taller" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <div class="title">Crear Taller</div>
                     <div class="description">Organiza talleres educativos con fechas, límites de participantes y control de disponibilidad. Gestiona tus eventos fácilmente.</div>
                     <div style="margin-top: 16px;">
@@ -149,7 +149,7 @@ $recent_quizzes = $stmt->fetchAll();
                 </button>
 
                 <div class="action-card-game slide-up" style="animation-delay: 0.3s; cursor: default;">
-                    <img src="<?php echo APP_URL; ?>/assets/avatar/12.png" alt="Códigos QR" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+                    <img src="<?php echo APP_URL; ?>/assets/avatar/6.png" alt="Códigos QR" style="width: 100px; height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
                     <div class="title">Códigos QR</div>
                     <div class="description">Genera y comparte códigos QR desde tus quizzes y talleres. Haz clic en el botón QR de cualquier elemento para verlo.</div>
                     <div style="margin-top: 16px;">
