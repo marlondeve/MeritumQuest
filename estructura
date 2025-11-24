@@ -1,9 +1,9 @@
 -- =========================================
 -- CREACIÓN DE BASE DE DATOS
 -- =========================================
--- Nota: Asegúrate de que la base de datos 'meritumquest' exista
+-- Nota: Asegúrate de que la base de datos 'kartti' exista
 -- o cambia el nombre aquí según tu configuración
--- USE meritumquest;
+-- USE kartti;
 
 -- =========================================
 -- ELIMINAR TABLAS SI EXISTEN (ORDEN CORRECTO)
@@ -15,29 +15,7 @@ DROP TABLE IF EXISTS quiz_question_options;
 DROP TABLE IF EXISTS quiz_questions;
 DROP TABLE IF EXISTS quiz_modes;
 DROP TABLE IF EXISTS participants;
-DROP TABLE IF EXISTS workshops;
-DROP TABLE IF EXISTS qr_codes;
 DROP TABLE IF EXISTS quizzes;
-DROP TABLE IF EXISTS users;
-
--- =========================================
--- TABLA: users (gestor de usuarios)
--- =========================================
-CREATE TABLE users (
-    id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username            VARCHAR(100) NOT NULL UNIQUE,
-    email               VARCHAR(255) NOT NULL UNIQUE,
-    password_hash       VARCHAR(255) NOT NULL,
-    full_name           VARCHAR(255) NULL,
-    role                ENUM('admin', 'member') NOT NULL DEFAULT 'member',
-    is_active           TINYINT(1) NOT NULL DEFAULT 1,
-    last_login          DATETIME NULL,
-    created_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    
-    INDEX idx_users_email (email),
-    INDEX idx_users_role (role)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- =========================================
 -- TABLA: quizzes (principal)
@@ -49,57 +27,8 @@ CREATE TABLE quizzes (
     description         TEXT,
     points_per_question INT DEFAULT 100,
     use_time_per_question TINYINT(1) DEFAULT 0,
-    created_by          BIGINT UNSIGNED NOT NULL,  -- Usuario que creó el quiz
     created_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (created_by) REFERENCES users(id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX idx_quizzes_created_by (created_by)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- =========================================
--- TABLA: workshops (talleres creados por usuarios)
--- =========================================
-CREATE TABLE workshops (
-    id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    code                VARCHAR(20) NOT NULL UNIQUE,  -- Código de acceso / QR
-    title               VARCHAR(255) NOT NULL,
-    description         TEXT,
-    created_by          BIGINT UNSIGNED NOT NULL,  -- Usuario que creó el taller
-    available_from      DATETIME NULL,
-    available_to        DATETIME NULL,
-    max_participants    INT NULL,
-    is_active           TINYINT(1) NOT NULL DEFAULT 1,
-    created_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (created_by) REFERENCES users(id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX idx_workshops_created_by (created_by),
-    INDEX idx_workshops_code (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- =========================================
--- TABLA: qr_codes (códigos QR generados para quizzes y talleres)
--- =========================================
-CREATE TABLE qr_codes (
-    id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    code                VARCHAR(20) NOT NULL UNIQUE,  -- Código único del QR
-    entity_type         ENUM('quiz', 'workshop', 'session') NOT NULL,
-    entity_id           BIGINT UNSIGNED NOT NULL,  -- ID del quiz, workshop o session
-    qr_image_url        VARCHAR(500) NULL,  -- URL de la imagen QR generada
-    generated_by        BIGINT UNSIGNED NOT NULL,  -- Usuario que generó el QR
-    is_active           TINYINT(1) NOT NULL DEFAULT 1,
-    expires_at          DATETIME NULL,  -- Fecha de expiración opcional
-    scan_count           INT DEFAULT 0,  -- Contador de escaneos
-    created_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (generated_by) REFERENCES users(id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX idx_qr_codes_code (code),
-    INDEX idx_qr_codes_entity (entity_type, entity_id),
-    INDEX idx_qr_codes_generated_by (generated_by)
+    updated_at          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- =========================================
@@ -238,63 +167,3 @@ CREATE TABLE quiz_attempt_answers (
     INDEX idx_answers_attempt (attempt_id),
     INDEX idx_answers_question (question_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- =========================================
--- NOTAS SOBRE EL GESTOR DE USUARIOS
--- =========================================
--- 
--- ROLES:
--- - 'admin': Puede crear y gestionar todos los quizzes y talleres
--- - 'member': Puede crear y gestionar sus propios quizzes y talleres
---
--- FUNCIONALIDADES:
--- 1. Los usuarios pueden crear quizzes y talleres (workshops)
--- 2. Cada quiz/taller tiene un código único que puede usarse para generar QR
--- 3. La tabla qr_codes almacena los códigos QR generados con su metadata
--- 4. Los códigos QR pueden generarse para:
---    - Quizzes individuales
---    - Talleres (workshops)
---    - Sesiones de quiz (quiz_sessions)
---
--- GENERACIÓN DE CÓDIGOS:
--- - Los códigos se generan automáticamente al crear quizzes/workshops
--- - Se pueden generar códigos QR adicionales usando la tabla qr_codes
--- - Cada código QR tiene un contador de escaneos y puede tener fecha de expiración
---
--- SEGURIDAD:
--- - Las contraseñas deben almacenarse como hash (usar password_hash de PHP o bcrypt)
--- - Los usuarios inactivos (is_active=0) no pueden iniciar sesión
--- - Los admins pueden gestionar todos los recursos, los members solo los suyos
-
--- =========================================
--- EJEMPLO: Crear usuario administrador inicial
--- =========================================
--- NOTA: Reemplaza 'tu_password_hash_aqui' con el hash real de la contraseña
--- Ejemplo usando PHP: password_hash('tu_contraseña', PASSWORD_DEFAULT)
---
--- INSERT INTO users (username, email, password_hash, full_name, role, is_active)
--- VALUES ('admin', 'admin@example.com', 'tu_password_hash_aqui', 'Administrador', 'admin', 1);
---
--- =========================================
--- EJEMPLO: Crear usuario miembro
--- =========================================
--- INSERT INTO users (username, email, password_hash, full_name, role, is_active)
--- VALUES ('miembro1', 'miembro1@example.com', 'tu_password_hash_aqui', 'Miembro Ejemplo', 'member', 1);
---
--- =========================================
--- EJEMPLO: Crear un quiz con código QR
--- =========================================
--- INSERT INTO quizzes (code, title, description, created_by)
--- VALUES ('QUIZ001', 'Mi Primer Quiz', 'Descripción del quiz', 1);
---
--- INSERT INTO qr_codes (code, entity_type, entity_id, generated_by)
--- VALUES ('QUIZ001', 'quiz', LAST_INSERT_ID(), 1);
---
--- =========================================
--- EJEMPLO: Crear un taller con código QR
--- =========================================
--- INSERT INTO workshops (code, title, description, created_by, available_from, available_to)
--- VALUES ('WORK001', 'Taller de Programación', 'Descripción del taller', 1, '2024-01-01 00:00:00', '2024-12-31 23:59:59');
---
--- INSERT INTO qr_codes (code, entity_type, entity_id, generated_by)
--- VALUES ('WORK001', 'workshop', LAST_INSERT_ID(), 1);

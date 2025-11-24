@@ -1,142 +1,171 @@
-# MeritumQ - Sistema de Gestión de Quizzes y Talleres
+# MeritumQuest - Sistema de Quizzes Interactivos
 
-Sistema moderno para crear y gestionar quizzes, talleres y generar códigos QR con roles de administrador y miembro.
+Sistema completo para crear y gestionar quizzes interactivos con soporte para eventos en vivo y modo taller autónomo.
 
-## Tecnologías Utilizadas
+## Características Principales
 
-- **PHP** - Backend
-- **MySQL** - Base de datos
-- **HTML/CSS** - Estructura y estilos
-- **JavaScript** - Interactividad
-- **Tailwind CSS** - Framework CSS moderno
-- **SweetAlert2** - Alertas elegantes
-- **QRCode.js** - Generación de códigos QR
-
-## Características
-
-### Gestión de Usuarios
-- Sistema de autenticación (login/registro)
-- Roles: Administrador y Miembro
-- Los administradores pueden gestionar todos los usuarios
-- Los miembros solo pueden gestionar sus propios recursos
-
-### Quizzes
-- Crear, editar y eliminar quizzes
-- Asignar puntos por pregunta
+### 🎯 Panel de Administrador
+- Crear y gestionar quizzes
+- Añadir preguntas con multimedia (imagen, video, audio)
 - Configurar tiempo por pregunta
-- Generación automática de códigos QR
+- Modo examen o modo juego
+- Analíticas completas con gráficas
+- Exportación a CSV
 
-### Talleres
-- Crear, editar y eliminar talleres
-- Configurar fechas de disponibilidad
-- Límite de participantes
-- Estado activo/inactivo
-- Generación automática de códigos QR
+### 👥 Interfaz del Estudiante
+- Acceso rápido por código o QR
+- Pantalla de espera para eventos en vivo
+- Interfaz intuitiva para responder preguntas
+- Feedback inmediato (opcional)
+- Visualización de resultados y ranking
 
-### Códigos QR
-- Generación automática al crear quizzes/talleres
-- Visualización de códigos QR
-- Descarga de códigos QR en formato PNG
-- Copiar códigos al portapapeles
-- Contador de escaneos
+### 📺 Pantalla del Presentador
+- Vista para proyección en clase
+- Contador de participantes conectados
+- Gráficas de resultados por pregunta
+- Ranking en tiempo real
+- Control de avance de preguntas
+
+## Requisitos
+
+- PHP 7.4 o superior
+- MySQL 5.7 o superior (o MariaDB 10.2+)
+- Servidor web (Apache/Nginx)
+- Extensiones PHP: PDO, JSON, mbstring
 
 ## Instalación
 
-1. **Configurar Base de Datos**
-   - Crear la base de datos `meritumquest` en MySQL
-   - Ejecutar el archivo `estructura` para crear las tablas
+1. **Clonar o descargar el proyecto** en tu servidor web (ej: `htdocs` en XAMPP)
 
-2. **Configurar Conexión**
-   - Editar `config/database.php` con tus credenciales de MySQL:
+2. **Configurar la base de datos:**
+   - Ejecutar el archivo `estructura` en MySQL para crear las tablas
+   - Actualizar las credenciales en `config.php`:
    ```php
-   define('DB_HOST', '5.183.11.230');
-   define('DB_NAME', 'meritumquest');
-   define('DB_USER', 'root');
-   define('DB_PASS', 'Platino5.');
+   define('DB_HOST', 'tu_host');
+   define('DB_NAME', 'tu_base_de_datos');
+   define('DB_USER', 'tu_usuario');
+   define('DB_PASS', 'tu_contraseña');
    ```
 
-3. **Configurar URL de la Aplicación**
-   - Editar `config/config.php` y ajustar `APP_URL` según tu configuración:
-   ```php
-   define('APP_URL', 'http://localhost/MeritumQ');
-   ```
+3. **Permisos de escritura:**
+   - Asegurar que los directorios `uploads/` y `cache/` tengan permisos de escritura
 
-4. **Crear Usuario Administrador**
-   - Ejecutar en MySQL:
-   ```sql
-   INSERT INTO users (username, email, password_hash, full_name, role, is_active)
-   VALUES ('admin', 'admin@example.com', '$2y$10$...', 'Administrador', 'admin', 1);
-   ```
-   - O usar el formulario de registro y luego cambiar el rol manualmente
+4. **Acceder al sistema:**
+   - Panel Admin: `http://localhost/MeritumQuest/admin/`
+   - Interfaz Estudiante: `http://localhost/MeritumQuest/student/`
+   - Pantalla Presentador: Se genera automáticamente al iniciar una sesión
 
 ## Estructura del Proyecto
 
 ```
-MeritumQ/
-├── api/                    # Endpoints API
-│   ├── delete-quiz.php
-│   ├── delete-workshop.php
-│   └── delete-user.php
-├── auth/                   # Autenticación
-│   ├── login.php
-│   ├── register.php
-│   └── logout.php
-├── config/                 # Configuración
-│   ├── config.php
-│   └── database.php
-├── dashboard/              # Panel principal
-│   ├── index.php
-│   ├── quizzes.php
-│   ├── workshops.php
-│   ├── qr-codes.php
-│   └── users.php
-├── includes/               # Componentes reutilizables
-│   ├── header.php
-│   └── sidebar.php
-└── estructura              # Script SQL de base de datos
+MeritumQuest/
+├── admin/              # Panel de administración
+│   ├── index.php      # Lista y gestión de quizzes
+│   ├── admin.js       # Lógica del panel admin
+│   ├── analytics.php  # Página de analíticas
+│   └── analytics.js   # Lógica de analíticas
+├── api/               # APIs REST
+│   ├── quizzes.php    # CRUD de quizzes
+│   ├── questions.php  # CRUD de preguntas
+│   ├── sessions.php   # Gestión de sesiones
+│   ├── attempts.php   # Intentos y respuestas
+│   └── analytics.php  # Estadísticas
+├── student/           # Interfaz del estudiante
+│   ├── index.php     # Pantalla principal
+│   └── student.js    # Lógica del estudiante
+├── presenter/         # Pantalla del presentador
+│   ├── index.php     # Vista de proyección
+│   └── presenter.js  # Lógica del presentador
+├── config.php        # Configuración y conexión BD
+├── estructura        # Script SQL de creación de BD
+└── README.md         # Este archivo
 ```
 
-## Uso
+## Uso del Sistema
 
-1. **Iniciar Sesión**
-   - Acceder a `/auth/login.php`
-   - O registrarse en `/auth/register.php`
+### Crear un Quiz
 
-2. **Crear Quiz**
-   - Ir a "Mis Quizzes" en el dashboard
-   - Click en "Crear Quiz"
-   - Completar formulario y guardar
+1. Accede al panel de administrador
+2. Haz clic en "Crear Nuevo Quiz"
+3. Completa el formulario:
+   - Título y descripción
+   - Puntos por pregunta
+   - Configuración de tiempo
+4. Guarda el quiz
 
-3. **Crear Taller**
-   - Ir a "Mis Talleres" en el dashboard
-   - Click en "Crear Taller"
-   - Completar formulario y guardar
+### Añadir Preguntas
 
-4. **Generar Código QR**
-   - Ir a "Códigos QR"
-   - O generar desde la lista de quizzes/talleres
-   - Descargar o copiar el código
+1. Haz clic en "Preguntas" en el quiz deseado
+2. Agrega una nueva pregunta:
+   - Texto de la pregunta
+   - Opcional: imagen, video o audio
+   - Tiempo límite (opcional)
+   - Múltiples respuestas (si aplica)
+   - Opciones de respuesta (mínimo 2)
+   - Marca las opciones correctas
+   - Explicación (opcional)
 
-## Permisos
+### Iniciar una Sesión
 
-### Administrador
-- Gestionar todos los usuarios
-- Ver y gestionar todos los quizzes y talleres
-- Generar códigos QR para cualquier recurso
+1. En el panel admin, haz clic en "Iniciar" en un quiz
+2. Selecciona el modo:
+   - **Evento en Vivo**: Requiere control del presentador
+   - **Modo Taller**: Autónomo, los estudiantes pueden hacerlo cuando quieran
+3. Se generará un código de sesión
+4. Abre la pantalla del presentador (para modo live)
+5. Comparte el código con los estudiantes
 
-### Miembro
-- Crear y gestionar sus propios quizzes y talleres
-- Generar códigos QR para sus recursos
-- Ver solo sus propios recursos
+### Participar en un Quiz
 
-## Seguridad
+1. El estudiante ingresa el código de sesión
+2. Ingresa su nombre
+3. Responde las preguntas
+4. Al finalizar, ve sus resultados y ranking (si está habilitado)
 
-- Contraseñas almacenadas con `password_hash()` de PHP
-- Validación de permisos en cada acción
-- Sanitización de entradas
-- Protección contra SQL Injection con PDO
-- Sesiones seguras
+## Modos de Operación
+
+### Modo Evento en Vivo
+- El presentador controla el avance de preguntas
+- Los estudiantes esperan en pantalla de espera
+- Resultados se muestran después de cada pregunta
+- Ranking en tiempo real
+
+### Modo Taller
+- Los estudiantes pueden empezar cuando quieran
+- No requiere presentador conectado
+- Configurable:
+  - Fechas de disponibilidad
+  - Límite de intentos
+  - Feedback inmediato o al final
+  - Ranking público o privado
+
+## Tecnologías Utilizadas
+
+- **Backend**: PHP (sin frameworks)
+- **Base de Datos**: MySQL
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Framework CSS**: Tailwind CSS
+- **Framework JS**: Alpine.js
+- **Gráficas**: Chart.js
+- **Alertas**: SweetAlert2
+- **Comunicación**: AJAX (JSON)
+
+## Notas Importantes
+
+- El sistema usa cache JSON para mejorar el rendimiento
+- Las sesiones se pueden cerrar manualmente desde el presentador
+- Los rankings se calculan automáticamente al finalizar intentos
+- Las analíticas se actualizan en tiempo real
+
+## Soporte
+
+Para problemas o preguntas, revisa:
+- Los logs del servidor web
+- Los logs de PHP
+- La consola del navegador (F12)
 
 ## Licencia
 
-Este proyecto es de uso libre para fines educativos y comerciales.
+Este proyecto es de código abierto y está disponible para uso educativo y comercial.
+
+
