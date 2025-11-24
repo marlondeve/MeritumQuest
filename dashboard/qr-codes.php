@@ -138,7 +138,7 @@ $qr_codes = $stmt->fetchAll();
                         </div>
                         <script>
                             new QRCode(document.getElementById("qrcode-<?php echo $qr['id']; ?>"), {
-                                text: "<?php echo APP_URL; ?>/join.php?code=<?php echo htmlspecialchars($qr['code']); ?>",
+                                text: "<?php echo PUBLIC_APP_URL; ?>/join.php?code=<?php echo htmlspecialchars($qr['code']); ?>",
                                 width: 200,
                                 height: 200,
                                 colorDark: "#000000",

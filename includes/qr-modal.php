@@ -97,9 +97,9 @@
                     document.getElementById('qrCode').value = data.code;
                     document.getElementById('qrScanCount').textContent = data.scan_count || 0;
                     
-                    // Generar QR con el código (por ahora solo el código, luego se puede cambiar a URL)
+                    // Generar QR con la URL completa
                     qrCodeInstance = new QRCode(container, {
-                        text: data.qr_code || data.code,
+                        text: data.qr_code || data.qr_url || data.code,
                         width: 250,
                         height: 250,
                         colorDark: "#000000",

@@ -71,8 +71,8 @@ echo json_encode([
     'code' => $entity['code'],
     'title' => $entity['title'],
     'entity_type' => $entity_type,
-    'qr_url' => APP_URL . '/join.php?code=' . $entity['code'],
-    'qr_code' => $entity['code'], // Código para el QR (por ahora solo el código)
+    'qr_url' => PUBLIC_APP_URL . '/join.php?code=' . $entity['code'],
+    'qr_code' => PUBLIC_APP_URL . '/join.php?code=' . $entity['code'], // URL completa para el QR
     'scan_count' => $qr['scan_count'] ?? 0
 ]);
 ?>

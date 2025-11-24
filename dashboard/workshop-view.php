@@ -171,7 +171,7 @@ $qr_code = $qrStmt->fetch();
     <script>
         <?php if ($qr_code): ?>
         new QRCode(document.getElementById("qrcode-workshop"), {
-            text: "<?php echo APP_URL; ?>/join.php?code=<?php echo htmlspecialchars($qr_code['code']); ?>",
+            text: "<?php echo PUBLIC_APP_URL; ?>/join.php?code=<?php echo htmlspecialchars($qr_code['code']); ?>",
             width: 200,
             height: 200,
             colorDark: "#000000",

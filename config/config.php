@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Configuración de la aplicación
 define('APP_NAME', 'MeritumQ');
 define('APP_URL', 'http://localhost/MeritumQ');
+define('PUBLIC_APP_URL', 'https://meritumcommunity.com');
 define('BASE_PATH', __DIR__ . '/..');
 
 // Zona horaria
